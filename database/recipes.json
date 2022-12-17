@@ -1,0 +1,14 @@
+[
+  {
+    "id": "1",
+    "name": "Moin moin",
+    "description": "Lorem Ipsum",
+    "ingredients": ["1"]
+  },
+  {
+    "id": "2",
+    "name": "Beans And Bread",
+    "description": "Lorem Ipsum",
+    "ingredients": ["1", "2"]
+  }
+]
