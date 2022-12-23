@@ -1,10 +1,13 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { MdAdd } from "react-icons/md";
-import { Ingredient, Recipe } from "../database/models";
+import { Recipe } from "../database/models";
 import RecipeCard from "./RecipeCard";
+import { usePopup } from "../hooks/PopupContext";
+import CreateEditRecipe from "./CreateEditRecipe";
 
 function RecipeFragment() {
+  const popup = usePopup();
   const [recipeArr, setRecipeArr] = useState<Recipe[]>([]);
 
   useEffect(() => {
@@ -12,11 +15,16 @@ function RecipeFragment() {
       setRecipeArr(response.data);
     });
   }, []);
+
+  function handleAddRecipeClick() {
+    popup?.show(<CreateEditRecipe />);
+  }
+
   return (
     <div className="flex flex-col">
       <div className="my-2">
         <span className="text-2xl mx-3 my-1">Recipes</span>
-        <button className="button">
+        <button className="button" onClick={handleAddRecipeClick}>
           <MdAdd />
         </button>
       </div>

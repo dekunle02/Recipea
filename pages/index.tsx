@@ -15,7 +15,7 @@ export default function Home() {
         <div className="p-2 border-b border-colorWhite/50 ">
           <h1 className="font-semibold">🍐 RECIPEA</h1>
         </div>
-        <div className="flex flex-col p-3 gap-3">
+        <div className="flex flex-col p-3 gap-4">
           <button className="w-1/2 mx-auto button bg-colorWhite hover:bg-colorGray text-colorBlack hover:text-colorWhite mt-2">
             Show Possible Recipes
           </button>

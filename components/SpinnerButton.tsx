@@ -11,17 +11,22 @@ interface SpinnerButtonProps
   loadState: LoadState;
 }
 
-function SpinnerButton(props: SpinnerButtonProps) {
+function SpinnerButton({
+  loadState,
+  className,
+  children,
+  ...otherProps
+}: SpinnerButtonProps) {
   return (
     <button
-      {...props}
-      disabled={props.loadState === LoadState.Loading}
-      className={`${props.className} flex flex-row items-center justify-center gap-3`}
+      {...otherProps}
+      disabled={loadState === LoadState.Loading}
+      className={`${className} flex flex-row items-center justify-center gap-3`}
     >
-      {props.loadState === LoadState.Loading && (
+      {loadState === LoadState.Loading && (
         <AiOutlineLoading3Quarters className="animate-spin" />
       )}
-      {props.children}
+      {children}
     </button>
   );
 }

@@ -77,7 +77,7 @@ export async function listRecipes() {
 export async function createRecipe(
   name: string,
   description: string,
-  ingredients: string[]
+  ingredients: string
 ) {
   const recipesJson = await fs.readFile(RecipePath);
   const recipeArr = JSON.parse(recipesJson.toString());
@@ -85,23 +85,44 @@ export async function createRecipe(
     id: uuidv4(),
     name: name,
     description: description,
-    ingredients: ingredients,
+    ingredients: ingredients.split(","),
   });
   await fs.writeFile(RecipePath, JSON.stringify(recipeArr));
 }
 
-export async function updateRecipe(recipe: Recipe, ingredients?: string[]) {
+type RecipeForm = {
+  id: string;
+  name: string;
+  description: string;
+  ingredients: string;
+};
+
+export async function updateRecipe({
+  id,
+  name,
+  description,
+  ingredients,
+}: RecipeForm) {
   const recipesJson = await fs.readFile(RecipePath);
   const recipeArr = JSON.parse(recipesJson.toString());
-  const newRecipe = {
-    ...recipe,
-    ingredients: recipe.ingredients.map((i) => i.id),
-  };
-  if (ingredients) newRecipe.ingredients = ingredients;
+
   const newArr = recipeArr.map((rec: any) => {
-    if (rec.id === recipe.id) {
-      return newRecipe;
-    } else return rec;
+    if (rec.id === id) {
+      return {
+        id: id,
+        name: name,
+        description: description,
+        ingredients: ingredients.split(","),
+      };
+    }
+    return rec;
   });
+  await fs.writeFile(RecipePath, JSON.stringify(newArr));
+}
+
+export async function deleteRecipe(recipeId: string) {
+  const recipesJson = await fs.readFile(RecipePath);
+  const recipeArr: Recipe[] = JSON.parse(recipesJson.toString());
+  const newArr = recipeArr.filter((rec) => rec.id !== recipeId);
   await fs.writeFile(RecipePath, JSON.stringify(newArr));
 }

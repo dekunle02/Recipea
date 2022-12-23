@@ -1,4 +1,3 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next";
 import * as dbClient from "../../../database/client";
 
@@ -8,11 +7,12 @@ export default async function handler(
 ) {
   if (req.method === "PATCH") {
     const { id } = req.query;
-    const { name, in_stock } = req.body;
-    dbClient.updateIngredient({
+    const { name, description, ingredients } = req.body;
+    dbClient.updateRecipe({
       id: id as string,
       name: name,
-      in_stock: in_stock,
+      description: description,
+      ingredients: ingredients,
     });
     res.status(200).json("Success");
     return;
@@ -20,7 +20,7 @@ export default async function handler(
 
   if (req.method === "DELETE") {
     const { id } = req.query;
-    dbClient.deleteIngredient(id as string);
+    dbClient.deleteRecipe(id as string);
     res.status(200).json("Success");
   }
 
