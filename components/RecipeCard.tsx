@@ -2,12 +2,17 @@ import { MdEdit } from "react-icons/md";
 import { Recipe } from "../database/models";
 import { usePopup } from "../hooks/PopupContext";
 import CreateEditRecipe from "./CreateEditRecipe";
+import DeleteRecipe from "./DeleteRecipe";
 
 function RecipeCard({ recipe }: { recipe: Recipe }) {
   const popup = usePopup();
   const ingredientString = recipe.ingredients.map((ing) => ing.name).join(", ");
   function handleRecipeEditClick() {
     popup?.show(<CreateEditRecipe recipe={recipe} />);
+  }
+
+  function handleRecipeDeleteClick() {
+    popup?.show(<DeleteRecipe recipe={recipe} />);
   }
   return (
     <div className="py-3 grid grid-cols-[1fr_auto_min-content] grid-rows-2 gap-2">
@@ -19,7 +24,12 @@ function RecipeCard({ recipe }: { recipe: Recipe }) {
         <MdEdit />
         Edit
       </button>
-      <button className="text-button row-span-2 my-auto px-3">Delete</button>
+      <button
+        className="text-button row-span-2 my-auto px-3"
+        onClick={handleRecipeDeleteClick}
+      >
+        Delete
+      </button>
       <p className="font-thin text-sm">Ingredients: {ingredientString}</p>
     </div>
   );
