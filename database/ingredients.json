@@ -1,4 +1,1 @@
-[
-  { "id": "1", "name": "Pepper", "in_stock": true },
-  { "id": "2", "name": "Sweet corn", "in_stock": false }
-]
+[{"id":"1","name":"Pepper","in_stock":true},{"id":"2","name":"Sweet corn","in_stock":false},{"id":"6bb7face-ca99-46bc-b599-3a573f73c965","name":"Garri","in_stock":true}]

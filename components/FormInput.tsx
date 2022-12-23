@@ -25,7 +25,7 @@ const FormInput = React.forwardRef<HTMLInputElement, FormInputProps>(
     return (
       <div className="relative flex-grow flex flex-col">
         <label
-          className={`mb-1 ml-1 font-semibold ${
+          className={`label ${
             isRequired ? "after:content-['*'] after:text-colorRed" : ""
           }`}
           htmlFor={id}
@@ -36,17 +36,13 @@ const FormInput = React.forwardRef<HTMLInputElement, FormInputProps>(
           <textarea
             ref={ref as ForwardedRef<HTMLTextAreaElement>}
             id={id}
-            className={`${
-              showError ? "ring-2 ring-rose-800/10 border border-rose-800" : ""
-            } w-full rounded-lg p-2 bg-colorGray focus:border-teal-600 focus:ring-teal-600/10 focus:ring-4 drop-shadow-sm`}
+            className="w-full rounded p-2 border border-colorWhite/50 bg-colorGray focus:ring focus:ring-colorPrimary/20  focus:border-colorPrimary"
             {...otherProps}
           />
         ) : (
           <input
             ref={ref}
-            className={`${
-              showError ? "ring-2 ring-rose-800/10 border border-rose-800" : ""
-            } w-full rounded-lg p-2 bg-colorGray focus:border-teal-600 focus:ring-teal-600/10 focus:ring-4 drop-shadow-sm`}
+            className="w-full rounded p-2 border border-colorWhite/50 bg-colorGray focus:ring focus:ring-colorPrimary/20  focus:border-colorPrimary"
             id={id}
             type={type}
             {...otherProps}

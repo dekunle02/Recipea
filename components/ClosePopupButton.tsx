@@ -9,7 +9,7 @@ function ClosePopupButton() {
       onClick={() => {
         popup?.dismiss();
       }}
-      className="text-2xl hover:bg-colorBlack/10 active:bg-colorBlack/20 
+      className="text-2xl hover:bg-colorWhite/10 active:bg-colorWhite/20 
         rounded-full p-3 ml-auto absolute top-2 right-2"
     >
       <MdOutlineClose />

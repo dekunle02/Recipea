@@ -59,7 +59,7 @@ export function PopupProvider({ children }: PopupProviderProps) {
           onClick={dismiss}
         >
           <div
-            className="mx-auto my-28 animate-slideup"
+            className="mx-auto my-auto animate-slideup text-colorWhite"
             onClick={(e) => e.stopPropagation()}
           >
             {content}

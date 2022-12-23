@@ -1,27 +1,8 @@
 import Head from "next/head";
-import path from "path";
-import fs from "fs/promises";
-import { Ingredient, Recipe } from "../database/models";
 import IngredientFragment from "../components/IngredientFragment";
 import RecipeFragment from "../components/RecipeFragment";
 
-export default function Home(props: {
-  ingredientArr: Ingredient[];
-  recipeArr: any[];
-}) {
-  const { ingredientArr, recipeArr } = props;
-
-  const hydratedRecipeArr: Recipe[] = [];
-
-  recipeArr.forEach((recipe) => {
-    const hydratedIngredientArr: Ingredient[] = [];
-    recipe.ingredients.forEach((ing: any) => {
-      const ingredient = ingredientArr.find((i) => i.id === ing);
-      if (ingredient) hydratedIngredientArr.push(ingredient);
-    });
-    hydratedRecipeArr.push({ ...recipe, ingredients: hydratedIngredientArr });
-  });
-
+export default function Home() {
   return (
     <>
       <Head>
@@ -30,35 +11,18 @@ export default function Home(props: {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="bg-colorBlack text-colorTextOnBlack w-screen h-screen">
+      <main className="bg-colorBlack text-colorTextOnBlack w-screen min-h-screen">
         <div className="p-2 border-b border-colorWhite/50 ">
           <h1 className="font-semibold">🍐 RECIPEA</h1>
         </div>
-        <br />
-        <IngredientFragment ingredientArr={ingredientArr} />
-        <br />
-        <RecipeFragment
-          ingredientArr={ingredientArr}
-          recipeArr={hydratedRecipeArr}
-        />
+        <div className="flex flex-col p-3 gap-3">
+          <button className="w-1/2 mx-auto button bg-colorWhite hover:bg-colorGray text-colorBlack hover:text-colorWhite mt-2">
+            Show Possible Recipes
+          </button>
+          <IngredientFragment />
+          <RecipeFragment />
+        </div>
       </main>
     </>
   );
-}
-
-export async function getServerSideProps() {
-  const ingredientPath = path.join(
-    process.cwd() + "/database/ingredients.json"
-  );
-  const recipesPath = path.join(process.cwd() + "/database/recipes.json");
-
-  const ingredientsJson = await fs.readFile(ingredientPath);
-  const recipesJson = await fs.readFile(recipesPath);
-
-  const ingredientArr = JSON.parse(ingredientsJson.toString());
-
-  const recipeArr = JSON.parse(recipesJson.toString());
-  return {
-    props: { ingredientArr: ingredientArr, recipeArr: recipeArr },
-  };
 }

@@ -14,6 +14,13 @@
   .link {
     @apply hover:underline italic text-colorBlack/80 dark:text-colorWhite/80;
   }
+  .label {
+    @apply mb-1 ml-1 font-semibold text-sm text-colorWhite/50;
+  }
+
+  .popupcard {
+    @apply bg-colorGray rounded-2xl p-2 md:w-[50vw] w-[90vw] relative;
+  }
 
   .button {
     @apply bg-colorPrimary text-colorTextOnPrimary hover:bg-colorPrimary/80 rounded-3xl p-2;
