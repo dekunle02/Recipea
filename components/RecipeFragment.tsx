@@ -5,6 +5,7 @@ import { Recipe } from "../database/models";
 import RecipeCard from "./RecipeCard";
 import { usePopup } from "../hooks/PopupContext";
 import CreateEditRecipe from "./CreateEditRecipe";
+import EmptyMessage from "./EmptyMessage";
 
 function RecipeFragment() {
   const popup = usePopup();
@@ -36,6 +37,9 @@ function RecipeFragment() {
           </li>
         ))}
       </ul>
+      {recipeArr.length === 0 && (
+        <EmptyMessage message="No Recipes In Database" />
+      )}
     </div>
   );
 }

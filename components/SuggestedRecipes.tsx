@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import ClosePopupButton from "./ClosePopupButton";
 import { Recipe, Ingredient } from "../database/models";
-import { displayPartsToString } from "typescript";
+import EmptyMessage from "./EmptyMessage";
 import axios from "axios";
 
 interface RecipeWithAvail extends Recipe {
@@ -79,6 +79,9 @@ function SuggestedRecipes() {
           </li>
         ))}
       </ul>
+      {recipeArr.length === 0 && (
+        <EmptyMessage message="No Recipes Can be Suggested" />
+      )}
     </div>
   );
 }
