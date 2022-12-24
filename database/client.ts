@@ -6,9 +6,9 @@ import { Ingredient, Recipe } from "./models";
 const IngredientPath = path.join(process.cwd() + "/database/ingredients.json");
 const RecipePath = path.join(process.cwd() + "/database/recipes.json");
 
-type Named = {
+interface Named {
   name: string;
-};
+}
 
 function sortByName(arr: Named[]) {
   arr.sort((a: Named, b: Named) => {
@@ -26,9 +26,15 @@ function sortByName(arr: Named[]) {
 }
 
 export async function listIngredients() {
-  const ingredientsJson = await fs.readFile(IngredientPath);
-  const ingredientArr = JSON.parse(ingredientsJson.toString());
-  return sortByName(ingredientArr);
+  let ingredientsString = "[]";
+  try {
+    const ingredientsJson = await fs.readFile(IngredientPath);
+    ingredientsString = ingredientsJson.toString();
+  } catch (err) {
+    await fs.writeFile(IngredientPath, ingredientsString);
+  }
+  const ingredientArr = JSON.parse(ingredientsString);
+  return sortByName(ingredientArr) as Ingredient[];
 }
 
 export async function createIngredient(name: string, in_stock: boolean) {
@@ -57,15 +63,20 @@ export async function deleteIngredient(ingredientId: string) {
 }
 
 export async function listRecipes() {
-  const recipesJson = await fs.readFile(RecipePath);
-  const recipeArr = JSON.parse(recipesJson.toString());
-  const ingredientsJson = await fs.readFile(IngredientPath);
-  const ingredientArr = JSON.parse(ingredientsJson.toString());
+  let recipesString = "[]";
+  try {
+    const recipesJson = await fs.readFile(RecipePath);
+    recipesString = recipesJson.toString();
+  } catch (err) {
+    await fs.writeFile(RecipePath, recipesString);
+  }
+  const recipeArr = JSON.parse(recipesString);
+  const ingredientArr: Ingredient[] = await listIngredients();
 
   const hydratedRecipeArr: Recipe[] = [];
-  recipeArr.forEach((recipe: Recipe) => {
+  recipeArr.forEach((recipe: any) => {
     const hydratedIngredientArr: Ingredient[] = [];
-    recipe.ingredients.forEach((ing: any) => {
+    recipe.ingredients.forEach((ing: string) => {
       const ingredient = ingredientArr.find((i: any) => i.id === ing);
       if (ingredient) hydratedIngredientArr.push(ingredient);
     });

@@ -21,7 +21,7 @@ export default function Home() {
       </Head>
       <main className="bg-colorBlack text-colorTextOnBlack w-screen min-h-screen">
         <div className="p-2 border-b border-colorWhite/50 ">
-          <h1 className="font-semibold">🍐 RECIPEA</h1>
+          <h1 className="font-light text-colorTextOnBlack">🍽️ RECIPEA</h1>
         </div>
         <div className="flex flex-col p-3 gap-4">
           <button
