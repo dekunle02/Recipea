@@ -1,12 +1,10 @@
 import axios from "axios";
 import { Ingredient } from "../database/models";
-import { useForm, SubmitHandler } from "react-hook-form";
 import React, { FormEvent, useState } from "react";
 import ClosePopupButton from "./ClosePopupButton";
 import FormInput from "./FormInput";
 import ToggleButton from "./ToggleButton";
 import SpinnerButton, { LoadState } from "./SpinnerButton";
-import { PopupProvider } from "../hooks/PopupContext";
 
 function CreateEditIngredient({ ingredient }: { ingredient?: Ingredient }) {
   const [name, setName] = useState(ingredient?.name ?? "");

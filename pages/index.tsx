@@ -1,8 +1,16 @@
 import Head from "next/head";
 import IngredientFragment from "../components/IngredientFragment";
 import RecipeFragment from "../components/RecipeFragment";
+import { usePopup } from "../hooks/PopupContext";
+import SuggestedRecipes from "../components/SuggestedRecipes";
 
 export default function Home() {
+  const popup = usePopup();
+
+  function handleShowSuggestionClick() {
+    popup?.show(<SuggestedRecipes />);
+  }
+
   return (
     <>
       <Head>
@@ -16,7 +24,10 @@ export default function Home() {
           <h1 className="font-semibold">🍐 RECIPEA</h1>
         </div>
         <div className="flex flex-col p-3 gap-4">
-          <button className="w-1/2 mx-auto button bg-colorWhite hover:bg-colorGray text-colorBlack hover:text-colorWhite mt-2">
+          <button
+            onClick={handleShowSuggestionClick}
+            className="w-1/2 mx-auto button bg-colorWhite hover:bg-colorGray text-colorBlack hover:text-colorWhite mt-2"
+          >
             Show Possible Recipes
           </button>
           <IngredientFragment />

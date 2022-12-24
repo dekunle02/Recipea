@@ -1,7 +1,5 @@
 import React, { ForwardedRef } from "react";
 
-// Documentation for react hook forms => https://react-hook-form.com/get-started#Handleerrors
-
 interface FormInputProps
   extends React.InputHTMLAttributes<HTMLInputElement | HTMLTextAreaElement> {
   isRequired?: boolean;

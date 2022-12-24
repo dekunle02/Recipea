@@ -1,6 +1,5 @@
 import axios from "axios";
 import { Ingredient } from "../database/models";
-import React, { FormEvent, useState } from "react";
 import ClosePopupButton from "./ClosePopupButton";
 import { usePopup } from "../hooks/PopupContext";
 
