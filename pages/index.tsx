@@ -20,8 +20,8 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="bg-colorBlack text-colorTextOnBlack w-screen min-h-screen">
-        <div className="p-2 border-b border-colorWhite/50 ">
-          <h1 className="font-light text-colorTextOnBlack">🍽️ RECIPEA</h1>
+        <div className="p-2 border-b border-colorPrimary/20 ">
+          <h1 className="font-light text-teal-600 font-mono">🍽️ Recipea</h1>
         </div>
         <div className="flex flex-col p-3 gap-4">
           <button
