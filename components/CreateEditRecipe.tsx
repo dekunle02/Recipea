@@ -125,7 +125,7 @@ function CreateEditRecipe({ recipe }: { recipe?: Recipe }) {
           onChange={handleChange}
         />
         <p className="label mt-6">Ingredients</p>
-        <div className="flex flex-row px-2 py-3 border border-colorWhite/10 rounded gap-2 flex-flow">
+        <div className="flex flex-row px-2 py-3 border border-colorWhite/10 rounded gap-2 flex-wrap">
           {ingredientArr.map((ingredient) => (
             <button
               type="button"
